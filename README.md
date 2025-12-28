@@ -80,7 +80,7 @@ handlers = load_handlers()
 node_types = load_node_types()
 ```
 
-## Included nodes (v0.3.1 baseline)
+## Included nodes (v0.3.2 baseline)
 
 Core:
 - `jarvis.core.echo`

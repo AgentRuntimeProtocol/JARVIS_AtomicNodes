@@ -1,8 +1,14 @@
 from __future__ import annotations
 
+from collections.abc import Callable
 from importlib.metadata import entry_points
+from typing import Any
+
+from arp_standard_model import AtomicExecuteRequest, NodeType
 
 from .sdk import NodePack
+
+AtomicHandler = Callable[[AtomicExecuteRequest], Any]
 
 
 def load_nodepacks() -> list[NodePack]:
@@ -22,15 +28,15 @@ def load_nodepacks() -> list[NodePack]:
     return packs
 
 
-def load_node_types() -> list[object]:
-    node_types: list[object] = []
+def load_node_types() -> list[NodeType]:
+    node_types: list[NodeType] = []
     for pack in load_nodepacks():
         node_types.extend(pack.node_types())
     return node_types
 
 
-def load_handlers() -> dict[str, object]:
-    handlers: dict[str, object] = {}
+def load_handlers() -> dict[str, AtomicHandler]:
+    handlers: dict[str, AtomicHandler] = {}
     for pack in load_nodepacks():
         handlers.update(pack.handlers())
     return handlers

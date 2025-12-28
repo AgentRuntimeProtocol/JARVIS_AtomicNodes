@@ -27,6 +27,8 @@ async def core_echo(inp: EchoInput, ctx: NodeContext) -> EchoOutput:
     return EchoOutput(echo=inp.root)
 
 
+
+
 class SleepInput(BaseModel):
     seconds: float | None = None
     duration_seconds: float | None = None
@@ -104,4 +106,3 @@ async def core_hash_sha256(inp: HashSha256Input, ctx: NodeContext) -> HashSha256
         data = (inp.text or "").encode(inp.encoding)
     digest = hashlib.sha256(data).hexdigest()
     return HashSha256Output(sha256=digest)
-

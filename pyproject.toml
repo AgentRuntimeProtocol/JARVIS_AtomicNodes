@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "arp-jarvis-atomic-nodes"
-version = "0.3.1"
+version = "0.3.2"
 description = "First-party atomic node pack for the JARVIS stack (metadata + handlers)."
 readme = "README.md"
 requires-python = ">=3.11"
