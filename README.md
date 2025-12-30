@@ -80,6 +80,18 @@ handlers = load_handlers()
 node_types = load_node_types()
 ```
 
+## NodeType `extensions` metadata
+
+Each NodeType emitted by this pack includes JARVIS metadata in `NodeType.extensions`, including:
+- `jarvis.pack_id` / `jarvis.pack_version` (provenance)
+- `jarvis.node_name` (stable node name)
+- `jarvis.side_effect`, `jarvis.trust_tier` (governance hints)
+- Optional: `jarvis.egress_policy`, `jarvis.budget_hints`, `jarvis.tags`
+
+Node Registry stores these fields verbatim and Selection Service may use a subset to enrich candidate ranking.
+
+Full cross-stack list: `Business_Docs/JARVIS/Extensions.md`.
+
 ## Included nodes (v0.3.2 baseline)
 
 Core:
