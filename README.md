@@ -90,7 +90,7 @@ Each NodeType emitted by this pack includes JARVIS metadata in `NodeType.extensi
 
 Node Registry stores these fields verbatim and Selection Service may use a subset to enrich candidate ranking.
 
-Full cross-stack list: `Business_Docs/JARVIS/Extensions.md`.
+Full cross-stack list: `https://github.com/AgentRuntimeProtocol/BusinessDocs/blob/main/Business_Docs/JARVIS/Extensions.md`.
 
 ## Included nodes (v0.3.2 baseline)
 
