@@ -92,7 +92,7 @@ Node Registry stores these fields verbatim and Selection Service may use a subse
 
 Full cross-stack list: `https://github.com/AgentRuntimeProtocol/BusinessDocs/blob/main/Business_Docs/JARVIS/Extensions.md`.
 
-## Included nodes (v0.3.2 baseline)
+## Included nodes (v0.3.3 baseline)
 
 Core:
 - `jarvis.core.echo`
