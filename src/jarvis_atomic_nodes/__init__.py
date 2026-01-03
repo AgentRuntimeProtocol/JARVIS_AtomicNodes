@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-__version__ = "0.3.3"
+__version__ = "0.3.5"
 
 from .catalog import node_types
 from .discovery import load_handlers, load_nodepacks, load_node_types
