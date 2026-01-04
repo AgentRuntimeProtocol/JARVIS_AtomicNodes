@@ -37,8 +37,8 @@ def test_core_handlers_roundtrip() -> None:
     registry = handlers(require_http=False)
 
     echo = registry["jarvis.core.echo"]
-    result = asyncio.run(_call(echo, _request("jarvis.core.echo", {"ping": "pong"})))
-    assert result == {"echo": {"ping": "pong"}}
+    result = asyncio.run(_call(echo, _request("jarvis.core.echo", {"echo": "pong"})))
+    assert result == {"echo": "pong"}
 
     uuid_out = asyncio.run(_call(registry["jarvis.core.uuid4"], _request("jarvis.core.uuid4", {})))
     assert isinstance(uuid_out.get("uuid4"), str)

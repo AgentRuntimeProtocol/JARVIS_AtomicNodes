@@ -44,24 +44,45 @@ from jarvis_atomic_nodes.handlers import handlers
 handler_map = handlers(require_http=True)
 ```
 
-### Authoring nodes (LangChain-like)
+### Authoring nodes (JSON-first)
 
 ```python
-from pydantic import BaseModel, HttpUrl
+from typing import Any
+
 from jarvis_atomic_nodes.sdk import atomic_node, NodeContext
 
-class WebFetchIn(BaseModel):
-    url: HttpUrl
+HEALTH_INPUT_SCHEMA = {
+    "type": "object",
+    "additionalProperties": False,
+    "properties": {
+        "base_url": {"type": ["string", "null"]},
+    },
+    "required": ["base_url"],
+}
 
-class WebFetchOut(BaseModel):
-    status_code: int
-    content_base64: str
+HEALTH_OUTPUT_SCHEMA = {
+    "type": "object",
+    "additionalProperties": False,
+    "properties": {
+        "status_code": {"type": "integer"},
+        "text": {"type": "string"},
+    },
+    "required": ["status_code", "text"],
+}
 
-@atomic_node(name="jarvis.web.fetch", side_effect="read")
-async def web_fetch(inp: WebFetchIn, ctx: NodeContext) -> WebFetchOut:
-    """Fetch a URL over HTTP(S) and return bytes."""
-    resp = await ctx.http.get(str(inp.url))
-    return WebFetchOut(status_code=resp.status_code, content_base64=resp.content)
+@atomic_node(
+    name="acme.api.health",
+    side_effect="read",
+    input_schema=HEALTH_INPUT_SCHEMA,
+    output_schema=HEALTH_OUTPUT_SCHEMA,
+)
+async def acme_api_health(inputs: dict[str, Any], ctx: NodeContext) -> dict[str, Any]:
+    """Call `GET /health` on an existing service and return the raw response text."""
+    base_url = (inputs.get("base_url") or "").strip()
+    if not base_url:
+        raise ValueError("Missing base_url")
+    resp = await ctx.http.get(f"{base_url.rstrip('/')}/health")
+    return {"status_code": resp.status_code, "text": resp.text}
 ```
 
 ### Entry point discovery
